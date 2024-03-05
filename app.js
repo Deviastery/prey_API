@@ -91,7 +91,7 @@ app.get("/api/hostiles/:id", async(req, res) => {
 
     const id = req.params.id;
     const hostile = await Hostile.find({id: id});
-    if(hostile) res.send(hostile);
+    if(!(hostile.length === 0)) res.send(hostile);
     else res.sendStatus(404);
 });
 
@@ -105,7 +105,8 @@ app.get("/api/abilities/:id", async(req, res) => {
 
     const id = req.params.id;
     const ability = await Ability.find({id: id});
-    if(ability) res.send(ability);
+    console.log(ability);
+    if(!(ability.length === 0)) res.send(ability);
     else res.sendStatus(404);
 });
 
@@ -119,7 +120,7 @@ app.get("/api/chipsets/:id", async(req, res) => {
 
     const id = req.params.id;
     const chipset = await Chipset.find({id: id});
-    if(chipset) res.send(chipset);
+        if (!(chipset.length === 0)) res.send(chipset);
     else res.sendStatus(404);
 });
 
@@ -139,9 +140,11 @@ app.get("/api/locations/:id", async(req, res) => {
     const id = req.params.id;
     const location = await Location.find({id: id});
 
-    const response = await getHostiles(location[0]);
-
-    if(location) res.send(response);
+    if(!(location.length === 0)) {
+        console.log(location);
+        const response = await getHostiles(location[0]);
+        res.send(response);
+    }
     else res.sendStatus(404);
 });
 
@@ -155,7 +158,7 @@ app.get("/api/weapons/:id", async(req, res) => {
 
     const id = req.params.id;
     const weapon = await Weapon.find({id: id});
-    if(weapon) res.send(weapon);
+    if (!(weapon.length === 0)) res.send(weapon);
     else res.sendStatus(404);
 });
 
