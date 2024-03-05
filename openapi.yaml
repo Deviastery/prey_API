@@ -1,0 +1,444 @@
+openapi: 3.0.3
+info:
+  title: Prey OpenAPI
+  version: 1.0.11
+servers:
+  - url: https://localhost:3001/api/
+    description: Dev server
+paths:
+  /hostiles:
+    get:
+      summary: Method for getting a list of hostiles
+      tags:
+        - Hostiles
+      operationId: getAllHostiles
+      responses:
+        '200':
+          description: Successful response with a list of hostiles
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Hostiles"
+        'default':
+          description: All not standard
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /hostiles/{_id}:
+    get:
+      summary: Method for getting a hostile by id
+      tags:
+        - Hostiles
+      operationId: getHostileById
+      parameters:
+        - name: _id
+          in: path
+          required: true
+          description: Identificator of hostile
+          schema:
+            type: string
+          example: 65de0d1c521a0e827361d92d
+      responses:
+        '200':
+          description: Successful response with a hostile
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Hostile"
+        'default':
+          description: All not standard
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /abilities:
+    get:
+      summary: Method for getting a list of abilities
+      tags:
+        - Abilities
+      operationId: getAllAbilities
+      responses:
+        '200':
+          description: Successful response with a list of abilities
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Abilities"
+        'default':
+          description: All not standard
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /abilities/{_id}:
+    get:
+      summary: Method for getting a ability by id
+      tags:
+        - Abilities
+      operationId: getAbilityById
+      parameters:
+        - name: _id
+          in: path
+          required: true
+          description: Identificator of ability
+          schema:
+            type: string
+          example: 65df4cda521a0e827361d997
+      responses:
+        '200':
+          description: Successful response with a ability
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Abilities"
+        'default':
+          description: All not standard
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /chipsets:
+    get:
+      summary: Method for getting a list of chipsets
+      tags:
+        - Chipsets
+      operationId: getAllChipsets
+      responses:
+        '200':
+          description: Successful response with a list of chipsets
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Chipset"
+        'default':
+          description: All not standard
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /chipsets/{_id}:
+    get:
+      summary: Method for getting a chipset by id
+      tags:
+        - Chipsets
+      operationId: getChipsetById
+      parameters:
+        - name: _id
+          in: path
+          required: true
+          description: Identificator of chipset
+          schema:
+            type: string
+          example: 65df5389521a0e827361d9a1
+      responses:
+        '200':
+          description: Successful response with a chipset
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Chipsets"
+        'default':
+          description: All not standard
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /locations:
+    get:
+      summary: Method for getting a list of locations
+      tags:
+        - Locations
+      operationId: getAllLocations
+      responses:
+        '200':
+          description: Successful response with a list of locations
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Location"
+        'default':
+          description: All not standard
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /locations/{_id}:
+    get:
+      summary: Method for getting a location by id
+      tags:
+        - Locations
+      operationId: getLocationById
+      parameters:
+        - name: _id
+          in: path
+          required: true
+          description: Identificator of location
+          schema:
+            type: string
+          example: 65df1587521a0e827361d95d
+      responses:
+        '200':
+          description: Successful response with a location
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Locations"
+        'default':
+          description: All not standard
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /weapons:
+    get:
+      summary: Method for getting a list of weapons
+      tags:
+        - Weapons
+      operationId: getAllWeapons
+      responses:
+        '200':
+          description: Successful response with a list of weapons
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Weapon"
+        'default':
+          description: All not standard
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /weapons/{_id}:
+    get:
+      summary: Method for getting a weapon by id
+      tags:
+        - Weapons
+      operationId: getWeaponById
+      parameters:
+        - name: _id
+          in: path
+          required: true
+          description: Identificator of weapon
+          schema:
+            type: string
+          example: 65df0f3b521a0e827361d946
+      responses:
+        '200':
+          description: Successful response with a weapon
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Weapons"
+        'default':
+          description: All not standard
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+       
+components:
+  schemas: 
+    Hostile:
+      type: object
+      required:
+        - name
+      properties:
+        _id:
+          type: string
+          example: 65de0d1c521a0e827361d92d
+        image_URL: 
+          type: string
+          example: https://static.wikia.nocookie.net/prey/images/8/87/Xpru13.jpg/revision/latest?cb=20170126175344
+        immunity:
+          type: array
+          items: 
+            type: string
+          example: ["EMP"]
+        name:
+          type: string
+          example: Mimic
+        research_count: 
+          type: number
+          example: 6
+        scannable_powers: 
+          type: array
+          items: 
+            type: string
+          example: ["Mimic Matter I, II, III"]
+        scientific_name: 
+          type: string
+          example: Typhon cacoplasmus
+        weaknesses: 
+          type: array
+          items: 
+            type: string
+          example: ["GLOO", "Q-Beam"]
+    Hostiles:
+      type: array
+      items:
+        $ref: "#/components/schemas/Hostile"
+    Ability:
+      type: object
+      required:
+        - name
+      properties:
+        _id:
+          type: string
+          example: 65df4cda521a0e827361d997
+        name:
+          type: string
+          example: Scientist
+        type:
+          type: string
+          example: Human
+        includes: 
+          type: array
+          items: 
+            type: object
+            properties:
+              name: 
+                type: string
+                example: Physician I
+              neuromods_count: 
+                type: number
+                example: 1
+              ability_tiers:
+                type: array
+                items: 
+                  type: object
+                  properties:
+                    name: 
+                      type: string
+                      example: Physician II
+                    neuromods_count: 
+                      type: number
+                      example: 3
+    Abilities:
+      type: array
+      items:
+        $ref: "#/components/schemas/Ability"
+    Chipset:
+      type: object
+      required:
+        - name
+      properties:
+        _id:
+          type: string
+          example: 65df5389521a0e827361d9a1
+        name:
+          type: string
+          example: ARTX PROPULSION GEN 1
+        type:
+          type: string
+          example: Suit
+        description:
+          type: string
+          example: Increases the Artax Propulsion System's glide speed.
+    Chipsets:
+      type: array
+      items:
+        $ref: "#/components/schemas/Chipset"
+    Location:
+      type: object
+      required:
+        - name
+      properties:
+        _id:
+          type: string
+          example: 65df1587521a0e827361d95d
+        name:
+          type: string
+          example: G.U.T.S
+        rooms: 
+          type: array
+          items: 
+            type: string
+          example: ["Cargo Tunnel", "Fuel Storage", "Magnetosphere Control Room", 
+"Maintenance Tunnel", "Medical Bay"]
+        quests: 
+          type: array
+          items: 
+            type: string
+          example: ["Detour", "Treasure Hunt"]
+        connects: 
+          type: array
+          items: 
+            type: string
+          example: ["Psychotronics", "Shuttle Bay", "Arboretum", "Cargo Bay"]
+        airlock: 
+          type: boolean
+          example: false
+        med_bay: 
+          type: boolean
+          example: true
+        crew_assigned: 
+          type: number
+          example: 6
+        hostiles: 
+          type: array
+          items:
+            $ref: "#/components/schemas/Hostile"
+    Locations:
+      type: array
+      items:
+        $ref: "#/components/schemas/Location"
+    Weapon:
+      type: object
+      required:
+        - name
+      properties:
+        _id:
+          type: string
+          example: 65df0f3b521a0e827361d946
+        name:
+          type: string
+          example: GLOO
+        primary_fire:
+          type: string
+          example: Glue
+        secondary_fire:
+          type: string
+          example: None
+        firing_range:
+          type: string
+          example: Short
+        rate_of_fire:
+          type: string
+          example: Moderate
+        material_cost: 
+          type: array
+          items: 
+            type: object
+            properties:
+              mineral_material: 
+                type: number
+                example: 3
+              synthetic_material: 
+                type: number
+                example: 3
+        material_yield: 
+          type: array
+          items: 
+            type: object
+            properties:
+              mineral_material: 
+                type: number
+                example: 1.5
+              synthetic_material: 
+                type: number
+                example: 1
+    Weapons:
+      type: array
+      items:
+        $ref: "#/components/schemas/Weapon"
+    Error:
+      type: object
+      required: 
+        - code
+        - name
+      properties:
+        code:
+          type: integer
+        message: 
+          type: string
