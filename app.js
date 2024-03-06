@@ -81,6 +81,17 @@ const Weapon = mongoose.model("Weapon", weaponSchema);
     }
 })();
 
+app.get("/api/", async(req, res) => {
+
+    res.send([{
+        "hostiles": "http:/localhost:3001/api/hostiles/",
+        "abilities": "http:/localhost:3001/api/abilities/",
+        "chipsets": "http:/localhost:3001/api/chipsets/",
+        "locations": "http:/localhost:3001/api/locations/",
+        "weapons": "http:/localhost:3001/api/weapons/"
+    }]);
+});
+
 app.get("/api/hostiles", async(req, res) => {
 
     const hostiles = await Hostile.find({});
@@ -105,7 +116,6 @@ app.get("/api/abilities/:id", async(req, res) => {
 
     const id = req.params.id;
     const ability = await Ability.find({id: id});
-    console.log(ability);
     if(!(ability.length === 0)) res.send(ability);
     else res.sendStatus(404);
 });
@@ -141,7 +151,6 @@ app.get("/api/locations/:id", async(req, res) => {
     const location = await Location.find({id: id});
 
     if(!(location.length === 0)) {
-        console.log(location);
         const response = await getHostiles(location[0]);
         res.send(response);
     }
